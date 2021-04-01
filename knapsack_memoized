@@ -1,0 +1,52 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+int knapsack_rec(int val[], int weight[], int n , int W, int dp[][4])
+{
+    if (n < 0)
+       return 0;
+     
+    if (dp[n][W] != -1 )
+       return dp[n][W];
+       
+     if (weight[n] > W) {
+        dp[n][W] = knapsack_rec(val, weight, n-1, W, dp);
+        return dp[n][W];
+     } else {  
+        dp[n][W] = (max((val[n] + knapsack_rec(val, weight, n-1, W-weight[n], dp)), 
+             knapsack_rec(val, weight, n-1, W, dp)));
+        return dp[n][W];
+     }
+
+}
+
+int knapsack(int val[], int weight[], int n, int W)
+{
+    int i = 0, j = 0;
+    int dp[n][W+1];
+    for (i=0; i <n; i++) {
+        for (j=0; j<W+1; j++) {
+            dp[i][j] = -1;
+        }
+    }
+    
+    return knapsack_rec(val, weight, n, W, dp);
+    
+}
+int main() {
+    // Write C code here
+    int weight[] = {10, 20, 30};
+    int val[] = {60, 100, 120};
+    int W = 50;
+    int max = 0;
+    int n = sizeof(val)/sizeof(val[0]);
+    max = knapsack(val, weight, n, W);
+    printf("MAX %d", max);
+    return 0;
+}       
