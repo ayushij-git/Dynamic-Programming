@@ -8,10 +8,10 @@ int max(int a, int b)
 int LCS_rec(char *txt1, char *txt2, int n, int m)
 {
    // printf("n = %d, m =%d \n", n, m);
-    if (n == -1 || m == -1)
+    if (n == 0 || m == 0)
         return 0;
     
-    if (txt1[n] == txt2 [m]) {
+    if (txt1[n - 1] == txt2 [m -1]) {
      //    printf("Same n = %d, m =%d \n", n, m);
        return (LCS_rec (txt1, txt2,n-1, m-1) + 1);
     } else {
@@ -23,7 +23,7 @@ int LCS_rec(char *txt1, char *txt2, int n, int m)
 
 int longestCommonSubsequence(char * text1, char * text2){
     
-    return (LCS_rec(text1, text2, strlen(text1)-1, strlen(text2) -1));
+    return (LCS_rec(text1, text2, strlen(text1), strlen(text2)));
     
 
 }
