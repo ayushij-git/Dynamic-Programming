@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+string codes[] = {".;", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tu", "vwx", "yz"};
+
+void printKPC(string ques, string asf){
+    if (ques.length() == 0)                                    //2
+    {
+      cout << asf << endl;;
+      return;
+    }
+    string res = ques.substr(1);
+    char ch    = ques.at(0);
+    int codeIndex = ch - '0';
+    string cd = codes[codeIndex];
+    
+    for(int i=0; i<cd.length(); i++) {
+        char ch1 = cd.at(i);
+        printKPC(res, asf+ch1);
+    }
+    
+}
+
+int main(){
+    string str;
+    cin >> str;
+    printKPC(str, "");
+}
