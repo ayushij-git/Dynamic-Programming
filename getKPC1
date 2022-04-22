@@ -1,0 +1,64 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include <map>
+using namespace std;
+
+std::map<int, string> keypad;
+
+vector<string> getKPC(string s) {
+  
+  if(s.length() == 0) {
+      
+      vector<string> res;
+      res.insert(res.begin(), " ");
+      return res;
+  }
+ 
+  char ch = s.at(0);
+
+  string ros = s.substr(1);
+  vector<string> res = getKPC(ros);
+  int integer = ch - '0';
+  vector<string> mres;
+  
+  for(int j=0; j<res.size(); j++) {
+    string str = res[j];
+    for(int i=0; i<keypad[integer].length(); i++) {
+      string str1 = keypad[integer].at(i) + str;
+      mres.insert(mres.begin(), str1);
+    }
+  }
+  return mres;
+
+}
+
+
+int main() {
+  string s;
+  cin >> s;
+keypad.insert(pair<int, string>(0, "."));
+  keypad.insert(pair<int, string>(1, "abc"));
+  keypad.insert(pair<int, string>(2, "def"));
+  keypad.insert(pair<int, string>(3, "ghi"));
+  keypad.insert(pair<int, string>(4, "jkl"));
+  keypad.insert(pair<int, string>(5, "mno"));
+  keypad.insert(pair<int, string>(6, "pqrs"));
+  keypad.insert(pair<int, string>(7, "tu"));
+  keypad.insert(pair<int, string>(8, "vwx"));
+  keypad.insert(pair<int, string>(9, "yz"));
+  
+  vector<string> ans = getKPC(s);
+  int cnt = 0;
+  
+
+  cout << '[';
+  for (string str : ans) {
+    if (cnt != ans.size() - 1)
+      cout << str << ", ";
+    else
+      cout << str;
+    cnt++;
+  }
+  cout << ']';
+}
