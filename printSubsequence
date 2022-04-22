@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+void printSS(string ques, string ans){
+    
+    if(ans.length() == 0)
+        return;
+    
+    string ros = ques.substring(1);
+    char ch = ques.at(0);
+    
+    printSS(ros, ans+ch);
+    printSS(ros, ans);
+    
+    cout << ans;
+    
+}
+
+int main(){
+    string str;
+    cin >> str;
+    printSS(str, "");
+}
