@@ -1,0 +1,40 @@
+#include<iostream>
+#include <stdio.h>
+#include<vector>
+
+using namespace std;
+// asf -> answer so far
+void floodfill(vector<vector<int>> maze, int sr, int sc, string asf,vector<vector<bool>> alreadyCovered) {
+
+    if(sr >= maze.size() || sc >= maze[sr].size() || sr < 0 || sc < 0 ||maze[sr][sc] || alreadyCovered[sr][sc]) {
+        return;
+    }
+
+    alreadyCovered[sr][sc] = true;
+
+    if (sr == maze.size()-1 && sc == maze[sr].size()-1) {
+        cout << asf << endl;
+        return;
+    }
+    
+    floodfill(maze, sr+1, sc,   asf+"d", alreadyCovered);
+    floodfill(maze, sr-1, sc,   asf+"u", alreadyCovered);
+    floodfill(maze, sr,   sc+1, asf+"r", alreadyCovered);
+    floodfill(maze, sr,   sc-1, asf+"l", alreadyCovered);
+   
+}
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+  vector <vector<int >> arr(n, vector < int > (m));
+  vector<vector<bool>>  alreadyCovered(n, vector < bool > (m));
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
+      cin >> arr[i][j];
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
+       alreadyCovered[i][j] = false;
+       
+  floodfill(arr, 0, 0, "", alreadyCovered);
+}
