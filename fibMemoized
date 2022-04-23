@@ -1,22 +1,39 @@
 #include <iostream>
+#include <iostream>
 using namespace std;
 
-int fib(int n){
+int fib(int n, int fibArr[]){
     // write your code here
-
-    if(n == 0 || n==1) {
-        return n;
+    if(n < 0) {
+      //  cout << "Returning 0" << endl;
+        return 0;
+    }
+        
+    if(fibArr[n] != -1) {
+        return fibArr[n];
     }
     
-    int fib1 = fib(n-1);
-    int fib2 = fib(n-2);
-    return (fib1 + fib2);
+    
+    int fib1 = fib(n-1, fibArr);
+    int fib2 = fib(n-2, fibArr);
+    fibArr[n] = (fib1 + fib2);
+  //  cout << fibArr[n]  << endl;
+    return fibArr[n];
 
 }
 
 int main(){
     int n;
     cin>>n;
-    cout<<fib(n)<<endl;
+    int fibArr[n];
+    
+    for(int i=0; i<=n; i++) {
+        fibArr[i] = -1;
+    }
+    fibArr[0] = 0;
+    fibArr[1] = 1;
+   // cout << "n:" << n << endl;
+    
+    cout<< fib(n, fibArr) << endl;
     return 0;
 }
