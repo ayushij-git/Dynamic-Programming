@@ -5,25 +5,35 @@ using namespace std;
 // sos is sum of subset
 // tar is target
 void printTargetSumSubsets(vector<int> arr, int idx, string set, int sos, int tar) {
-    if(tar == sos) {
-        cout << set << "." << endl;
-        return;
-    }
-    if (idx == arr.size()-1) {
+    
+    
+     
+       
+    /*if(tar == sos) {
+        cout << "idx:" << idx << endl;
+        cout << "arr[idx]" << arr[idx] << endl;
+        cout << "set+to_string(arr[idx])+" << set+to_string(arr[idx])+"," << endl;
+        cout << "sos:" << sos+arr[idx] << endl;
+    }*/
+    
+    if(idx == arr.size()) {
+        
         if(tar == sos) {
             cout << set << "." << endl;
             return;
-        }
-    } 
-    if (idx >= arr.size()) {
+        } 
         return;
     }
-   
-    //cout << "idx:" << idx << endl;
-//    cout << "arr[idx]" << arr[idx] << endl;
-//    cout << "set+to_string(arr[idx])+" << set+to_string(arr[idx])+"," << endl;
-//    cout << "sos:" << sos+arr[idx] << endl;
-    printTargetSumSubsets(arr, idx+1, set+to_string(arr[idx])+","+" ", sos+arr[idx], tar);
+    
+    if (arr[idx] > tar)
+        return printTargetSumSubsets(arr, idx+1, set, sos, tar);
+        
+    if (idx > arr.size()-1) {
+        return;
+    }
+    
+ 
+    printTargetSumSubsets(arr, idx+1, set+to_string(arr[idx])+", ", sos+arr[idx], tar);
     
     printTargetSumSubsets(arr, idx+1, set, sos, tar);
     
@@ -38,14 +48,13 @@ int main() {
     cin >> n;
     
     vector<int> arr(n,0);
-   // cout << n << endl;
+    //cout << n << endl;
     for(int i=0; i<n; i++) {
         cin >> arr[i];
-       // cout << to_string(arr[i]) << endl;
+        //cout << to_string(arr[i]) << endl;
     }
     cin >> target;
     //cout << "target:" << target << endl;
-    //cout << arr.size() << endl;
+   // cout << "arr size" << arr.size() << endl;
     printTargetSumSubsets(arr, 0, "", 0, target);
-
 }
