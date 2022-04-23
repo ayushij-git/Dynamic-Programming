@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int cs(int n, int way[]){
+    
+    if(n == 0) {
+        return 1;
+    }
+    if (n < 0) {
+        return 0;
+    }
+    if(way[n] != -1) {
+        return way[n];
+    }
+
+    way[n] = cs(n-1, way) + cs(n-2, way) + cs(n-3, way);
+    return way[n];
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int way[n];
+    
+    for(int i=0; i<=n; i++) {
+        way[i] = -1;
+    }
+    cout<<cs(n, way)<<endl;
+}
