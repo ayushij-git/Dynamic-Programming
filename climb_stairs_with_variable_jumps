@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+/*
+int cs(int arr[], int n, int way[], int currStair){
+
+    if (currStair == n) {
+        return 1;
+    }    
+    if(currStair < 0) {
+        return 0;
+    }
+
+    for(int i=1; i<=arr[currStair]; i++) {
+        cout << "arr[" << currStair << "]" << arr[currStair] << endl;
+        if(i+currStair <= n) {
+            way[currStair] += cs(arr , n, way, currStair+i);
+        }
+    }
+    cout <<  "currStair:" << currStair << endl;
+    cout << "way[currStair]:" << way[currStair] << endl;
+    
+    
+    return way[currStair];
+    
+}*/
+
+int cs(int arr[], int n, int currStair){
+    int count = 0;
+    if (currStair == n) {
+        return 1;
+    }    
+    if(currStair < 0) {
+        return 0;
+    }
+
+    for(int i=1; i<=arr[currStair]; i++) {
+        //cout << "arr[" << currStair << "]" << arr[currStair] << endl;
+        if(i+currStair <= n) {
+            count += cs(arr , n,  currStair+i);
+        }
+    }
+ //   cout <<  "currStair:" << currStair << endl;
+ //   cout << "way[currStair]:" << way[currStair] << endl;
+    
+    
+    return count;
+    
+}
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+
+    for(int i = 0 ; i < n ;i++){
+        cin>>arr[i];
+    }
+    
+   
+    cout<<cs(arr, n, 0)<<endl;
+}
